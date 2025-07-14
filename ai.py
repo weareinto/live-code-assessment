@@ -1,5 +1,4 @@
 from config import settings
-import re
 
 WORD = "INTO AI "
 
