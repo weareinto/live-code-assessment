@@ -9,9 +9,9 @@ class Message(Base):
     __tablename__ = "messages"
     
     id = Column(Integer, primary_key=True, index=True)
-    user_message = Column(Text, nullable=False)
     model_name = Column(String(100), nullable=False)
-    llm_response = Column(Text, nullable=False)
+    input = Column(Text, nullable=False)
+    output = Column(Text, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
     def __repr__(self):

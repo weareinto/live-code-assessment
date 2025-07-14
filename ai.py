@@ -1,5 +1,6 @@
 from config import settings
 
+
 WORD = "INTO AI "
 
 KEYS = {
@@ -13,23 +14,20 @@ KEYS = {
 class LLM:
     def __init__(self):
         print("Initializing LLM...")
-        self.api_key = settings.OPENAI_API_KEY
-        self.model_name = settings.OPENAI_MODEL_NAME
+        self.model_name = settings.MODEL_NAME
 
     
     def vaildate(self) -> bool:
         # Simulate API key validation
-        if not self.api_key or not isinstance(self.api_key, str) or self.api_key != "FAKE_OPENAI_KEY":
-            raise ValueError("Invalid API key")
+        if not self.model_name or not isinstance(self.model_name, str) or self.model_name != "gpt-4o":
+            raise ValueError("Invalid model name")
         
 
     # TODO: Replace the {number} with the mapped KEYS
     # Exp: "Hi, {1}, We r {2}" -> "Hi, INTO AI, We r INTO AI INTO AI"
     async def generate_response(self, prompt: str) -> str:
         self.vaildate()
-        
-        # Simulate response generation
-        response = f"Generated response for prompt: {prompt}"
 
-        # TODO: Store the message in the database
+        response = f"Generated response for prompt: {prompt}"
+ 
         return response

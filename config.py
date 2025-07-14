@@ -3,8 +3,9 @@
 # TODO: Create the settings class
 
 
+
 def get_settings():
-    pass
+    return None
 
 
 settings = get_settings()
