@@ -25,8 +25,11 @@ class LLM:
 
     # TODO: Replace the {number} with the mapped KEYS
     # Exp: "Hi, {1}, We r {2}" -> "Hi, INTO AI, We r INTO AI INTO AI"
-    def generate_response(self, prompt: str) -> str:
+    async def generate_response(self, prompt: str) -> str:
         self.vaildate()
+        
         # Simulate response generation
         response = f"Generated response for prompt: {prompt}"
+
+        # TODO: Store the message in the database
         return response

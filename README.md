@@ -10,7 +10,7 @@ To complete this assessment, please implement the following:
 2. [ ] **Settings Management**
    Create a FastAPI-compatible settings class to load values from the `.env` file and use them throughout your app.
 
-3. [ ] **API Endpoint**
+3. [ ] **API Endpoint for LLM Response**
    Create a new API endpoint with the following specs:
 
    * Accepts a request with a payload containing:
@@ -20,10 +20,22 @@ To complete this assessment, please implement the following:
    * Requires an `API_KEY` to be passed in the request headers.
      * If the key is missing or invalid, return an authentication error.
    * This endpoint should use the **LLM** class to generate a response and return it to the user.
+   * **Store the user message, model name, and generated LLM response in the database when generating the response.**
 
 4. [ ] **Modify LLM class**
    Update the `generate_response` function inside the `LLM` class:
    * Replace any keys/tokens in the prompt with the provided context before generating the final output.
+
+5. [ ] **Database Integration**
+   Implement SQLAlchemy database functionality:
+   * Create a `Message` model to store conversation history.
+   * Use proper database session management with FastAPI dependency injection.
+
+6. [ ] **API Endpoint for Fetching Messages**
+   Create an additional API endpoint to retrieve stored messages:
+   * Create an endpoint to fetch all messages from the database
+   * Support pagination (optional but recommended)
+   * Return the conversation history in a structured format
 
 
 ---

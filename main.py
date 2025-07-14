@@ -1,6 +1,18 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException, Header
+from sqlalchemy.orm import Session
 from ai import LLM
+from models import create_tables
+from config import settings
+from contextlib import asynccontextmanager
+
+
 app = FastAPI()
+
+# Create tables on startup
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_tables()
+    yield
 
 @app.get("/")
 def read_root():
@@ -8,4 +20,12 @@ def read_root():
 
 
 # TODO: create the new endpoint here
-# The payload should have, the text and the model name
+
+
+
+
+
+
+
+
+# TODO: Get all the messages from the database
