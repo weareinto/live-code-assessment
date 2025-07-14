@@ -4,13 +4,13 @@
 
 To complete this assessment, please implement the following:
 
-1. ✅ **Environment Setup**
+1. [ ] **Environment Setup**
    You must be able to run the project successfully with environment variables defined in the `.env` file.
 
-2. ✅ **Settings Management**
+2. [ ] **Settings Management**
    Create a FastAPI-compatible settings class to load values from the `.env` file and use them throughout your app.
 
-3. ✅ **API Endpoint**
+3. [ ] **API Endpoint**
    Create a new API endpoint with the following specs:
 
    * Accepts a request with a payload containing:
@@ -21,7 +21,7 @@ To complete this assessment, please implement the following:
      * If the key is missing or invalid, return an authentication error.
    * This endpoint should use the **LLM** class to generate a response and return it to the user.
 
-4. ✅ **Modify LLM class**
+4. [ ] **Modify LLM class**
    Update the `generate_response` function inside the `LLM` class:
    * Replace any keys/tokens in the prompt with the provided context before generating the final output.
 
