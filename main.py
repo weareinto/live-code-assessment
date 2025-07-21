@@ -18,7 +18,7 @@ def read_root():
     return {"message": "Hello Candidate!"}
 
 
-# TODO: create the new endpoint here
+# TODO: create a new message endpoint
 # TODO: Store the message response in the database
 
 
