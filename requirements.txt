@@ -16,3 +16,7 @@ python-dotenv==1.0.1
 
 # database
 sqlalchemy==2.0.38
+
+# Vector database
+langchain-community==0.3.27
+faiss-cpu==1.11.0

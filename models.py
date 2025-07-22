@@ -20,7 +20,7 @@ class Message(Base):
 # Database setup
 def get_database_url():
     """Get database URL from settings or use SQLite as default"""
-    return "sqlite:///./messages.db"
+    return "sqlite:///./database.db"
 
 # Create engine
 engine = create_engine(

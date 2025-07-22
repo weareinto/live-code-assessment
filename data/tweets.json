@@ -1,0 +1,37 @@
+[
+  {
+    "author": {
+      "name": "Elena Petrova",
+      "country": "Bulgaria"
+    },
+    "tweet": "Just deployed our microservice architecture using #FastAPI and Docker "
+  },
+  {
+    "author": {
+      "name": "Carlos Mendoza",
+      "country": "Mexico"
+    },
+    "tweet": "Graph embeddings are opening crazy new doors in recommendation systems! #ML #DataScience"
+  },
+  {
+    "author": {
+      "name": "Aisha Khan",
+      "country": "Pakistan"
+    },
+    "tweet": "Thrilled to see our paper on video summarization accepted  #DeepLearning"
+  },
+  {
+    "author": {
+      "name": "Liam O'Sullivan",
+      "country": "Ireland"
+    },
+    "tweet": "CI/CD pipelines saved us hours this sprint. GitHub Actions for the win! #DevOps"
+  },
+  {
+    "author": {
+      "name": "Noura Al-Sayed",
+      "country": "Egypt"
+    },
+    "tweet": "Experimenting with RAG and LlamaIndex to build smarter chatbots. Loving the results so far!"
+  }
+]
