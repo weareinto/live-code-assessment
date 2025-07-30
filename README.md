@@ -1,37 +1,5 @@
 # Live Code Assessment
 
-## Requirements
-
-To complete this assessment, please implement the following:
-
-
-1. [ ] **Settings Management**
-   Create a FastAPI-compatible settings class to load values from the `.env` file and use them throughout your app.
-
-2. [ ] **API Endpoint for LLM Response**
-   Create a new API endpoint with the following specs:
-
-   * Accepts a request with a payload containing:
-     * `message`: the user's input message.
-     * `model_name`: name of the LLM model to use.
-   * Validate `model_name` using Pydantic to allow only supported models that exists in the environment variables
-   * Requires an `API_KEY` to be passed in the request headers.
-     * If the key is missing or invalid, return an authentication error.
-   * This endpoint should use the **LLM** class to generate a response and return it to the user.
-   * **Store the user message, model name, and generated LLM response in the database when generating the response.**
-
-3. [ ] **Modify LLM class**
-   Update the `generate_response` function inside the `LLM` class:
-   * Replace any keys/tokens in the prompt with the provided context before generating the final output.
-
-4. [ ] **API Endpoint for Fetching Messages**
-   Create an additional API endpoint to retrieve stored messages:
-   * Create an endpoint to fetch all messages from the database
-   * Return the conversation history in a structured format using pydantic
-
-
----
-
 ## Setup Instructions
 
 1. **Clone the repository**
@@ -51,7 +19,7 @@ cp .env.sample .env
 
 ```bash
 python -m venv venv
-source venv/bin/activate    # On Windows use: venv/Scripts/activate
+source venv/bin/activate    # On Windows use: venv\Scripts\activate
 ```
 
 4. **Install dependencies**
@@ -70,3 +38,126 @@ uvicorn main:app --reload
 
 * Open your browser and go to [http://localhost:8000](http://localhost:8000)
 * API docs are at [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+## 📋 Task Breakdown by File
+To complete this assessment, you'll need to implement functionality across multiple files. Below is a detailed breakdown of what needs to be done in each file:
+
+### 1. 📝 **config.py** - Settings Management
+**What to implement:**
+- Create a FastAPI-compatible settings class using `pydantic-settings`
+- Load environment variables from `.env` file (`API_KEY`, `MODEL_NAME`)
+- Replace the empty `get_settings()` function to return the settings instance
+
+**Requirements:**
+- Use `BaseSettings` from `pydantic_settings`
+- Load `API_KEY` and `MODEL_NAME` from environment variables
+- Make settings available throughout the app
+
+---
+
+### 2. 📊 **schemas.py** - Request/Response Models
+**What to implement:**
+- Create Pydantic models for API request and response validation
+- Add model name validation to ensure only supported models are allowed
+
+**Required schemas:**
+- `MessageRequest`: Contains `message` (str) and `model_name` (str)
+- `MessageResponse`: Contains the LLM response data
+- `MessageHistory`: For retrieving stored messages
+- Model name validator that checks against supported models in environment
+
+---
+
+### 3. 🚀 **main.py** - API Endpoints
+**What to implement:**
+- Create POST endpoint `/generate` for LLM message generation
+- Create GET endpoint `/messages` to retrieve conversation history
+- Add proper dependency injection for database sessions
+- Implement API key authentication via headers
+
+**Endpoint specifications:**
+- **POST `/generate`**: 
+  - Accepts `MessageRequest` body
+  - Requires `API_KEY` in headers
+  - Uses LLM class to generate response
+  - Stores input/output in database
+  - Returns generated response
+- **GET `/messages`**: 
+  - Returns all stored messages from database
+  - Use proper Pydantic response models
+
+---
+
+### 4. 🤖 **ai.py** - LLM Response Generation
+**What to implement:**
+- Update `generate_response()` method to replace placeholder tokens
+- Replace `{name}`, `{country}`, `{industry}` with values from KEYS dictionary
+- **BONUS**: Integrate with retriever to get top relevant tweet
+
+**Example transformation:**
+```
+Input: "Hi {name}, we're in {country}"
+Output: "Hi INTO AI, we're in Canada"
+```
+
+---
+
+### 5. 🗄️ **retriever.py** - Vector Search (BONUS)
+**What to implement:**
+- Load tweets from `data/tweets.json`
+- Create FAISS vector store with tweet documents
+- Set tweet text as page content and author info as metadata
+- Provide retrieval functionality for relevant tweets
+
+**Requirements:**
+- Load JSON data and convert to LangChain Documents
+- Use existing FAISS and FakeEmbeddings setup
+- Make retriever available for LLM class integration
+
+---
+
+### 6. ⚡ **background.py** - Background Tasks (BONUS)
+**What to implement:**
+- Create FastAPI background task function
+- Check if "INTO AI" exists in generated message output
+- Delete message from database if "INTO AI" is not found
+- Integrate with the main message generation endpoint
+
+---
+
+## 🎯 Core Requirements Summary
+
+### **MUST HAVE (Required for completion):**
+1. [ ] **Settings Management** (`config.py`)
+   - FastAPI settings class with environment variable loading
+
+2. [ ] **Request/Response Schemas** (`schemas.py`)
+   - Pydantic models for API validation
+   - Model name validation
+
+3. [ ] **API Endpoints** (`main.py`)
+   - POST `/generate` - Generate LLM responses with authentication
+   - GET `/messages` - Retrieve conversation history
+   - Database integration for storing messages
+
+4. [ ] **LLM Token Replacement** (`ai.py`)
+   - Replace `{key}` placeholders with actual values from KEYS dictionary
+
+### **BONUS (Optional for extra credit):**
+5. [ ] **Vector Retrieval** (`retriever.py`)
+   - Load tweets and create searchable vector store
+   - Integrate top tweet retrieval in LLM generation
+
+6. [ ] **Background Tasks** (`background.py`)
+   - Content validation and cleanup via background processing
+
+---
+
+## 🔧 Implementation Notes
+
+- **Authentication**: Use API key from headers, validate against environment variable
+- **Database**: Messages are automatically stored using the existing SQLAlchemy models
+- **Error Handling**: Return appropriate HTTP status codes for authentication failures
+- **Testing**: Use FastAPI's automatic documentation at `/docs` to test your endpoints
