@@ -8,9 +8,9 @@ KEYS = {
     "industry": "AI",
 }
 
-class LLM:
+class FakeLLM:
     def __init__(self):
-        print("Initializing LLM...")
+        print("Initializing FakeLLM...")
         self.model_name = settings.MODEL_NAME
 
 

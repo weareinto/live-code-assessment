@@ -64,7 +64,7 @@ To complete this assessment, you'll need to implement functionality across multi
 
 **Required schemas:**
 - `MessageRequest`: Contains `message` (str) and `model_name` (str)
-- `MessageResponse`: Contains the LLM response data
+- `MessageResponse`: Contains the FakeLLM response data
 - `MessageHistory`: For retrieving stored messages
 - Model name validator that checks against supported models in environment
 
@@ -72,7 +72,7 @@ To complete this assessment, you'll need to implement functionality across multi
 
 ### 3. 🚀 **main.py** - API Endpoints
 **What to implement:**
-- Create POST endpoint `/generate` for LLM message generation
+- Create POST endpoint `/generate` for FakeLLM message generation
 - Create GET endpoint `/messages` to retrieve conversation history
 - Add proper dependency injection for database sessions
 - Implement API key authentication via headers
@@ -81,7 +81,7 @@ To complete this assessment, you'll need to implement functionality across multi
 - **POST `/generate`**: 
   - Accepts `MessageRequest` body
   - Requires `API_KEY` in headers
-  - Uses LLM class to generate response
+  - Uses FakeLLM class to generate response
   - Stores input/output in database
   - Returns generated response
 - **GET `/messages`**: 
@@ -90,7 +90,7 @@ To complete this assessment, you'll need to implement functionality across multi
 
 ---
 
-### 4. 🤖 **ai.py** - LLM Response Generation
+### 4. 🤖 **ai.py** - FakeLLM Response Generation
 **What to implement:**
 - Update `generate_response()` method to replace placeholder tokens
 - Replace `{name}`, `{country}`, `{industry}` with values from KEYS dictionary
@@ -114,7 +114,7 @@ Output: "Hi INTO AI, we're in Canada"
 **Requirements:**
 - Load JSON data and convert to LangChain Documents
 - Use existing FAISS and FakeEmbeddings setup
-- Make retriever available for LLM class integration
+- Make retriever available for FakeLLM class integration
 
 ---
 
@@ -138,17 +138,17 @@ Output: "Hi INTO AI, we're in Canada"
    - Model name validation
 
 3. [ ] **API Endpoints** (`main.py`)
-   - POST `/generate` - Generate LLM responses with authentication
+   - POST `/generate` - Generate FakeLLM responses with authentication
    - GET `/messages` - Retrieve conversation history
    - Database integration for storing messages
 
-4. [ ] **LLM Token Replacement** (`ai.py`)
+4. [ ] **FakeLLM Token Replacement** (`ai.py`)
    - Replace `{key}` placeholders with actual values from KEYS dictionary
 
 ### **BONUS (Optional for extra credit):**
 5. [ ] **Vector Retrieval** (`retriever.py`)
    - Load tweets and create searchable vector store
-   - Integrate top tweet retrieval in LLM generation
+   - Integrate top tweet retrieval in FakeLLM generation
 
 6. [ ] **Background Tasks** (`background.py`)
    - Content validation and cleanup via background processing
