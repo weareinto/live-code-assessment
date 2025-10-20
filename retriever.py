@@ -17,5 +17,4 @@ tweets = []
 
 
 
-
-retriever = FAISS.from_documents(tweets, embeddings)
+vector_store = FAISS.from_documents(tweets, embeddings)
